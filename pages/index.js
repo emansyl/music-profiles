@@ -3,12 +3,10 @@ import Image from 'next/image'
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
-import Date from "../components/date";
-import Song from "../components/song";
-import { getUserData } from "../lib/getUser";
+
 import {useState} from 'react';
 import {useSession, signIn, signOut} from 'next-auth/react';
-import { list } from "mdast-util-to-hast/lib/handlers/list";
+
 
 
 
