@@ -79,7 +79,7 @@ export default function Home({ context }) {
             />
             <h1 className={utilStyles.heading2Xl}>{name}'s Music Profile</h1>
         <section className={utilStyles.headingMd}>
-          
+          <p>{profileImage}</p>
           <p>"Hi, I'm {name}. Checkout my music taste</p>
         </section>
         {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
