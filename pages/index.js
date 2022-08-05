@@ -71,7 +71,7 @@ export default function Home({ context }) {
         </Head>
         <Image
               priority
-              src={profileImage}
+              src={profileImage || '/images/music-placeholder.png'}
               className={utilStyles.borderCircle}
               height={144}
               width={144}
