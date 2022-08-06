@@ -109,8 +109,25 @@ export default function Home({ context }) {
 
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        {/* <Image
+          priority
+          src={ "/images/spotify-banner.png"}
+          className='w-full'
+          height={300}
+          width={300}
+        ></Image> */}
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Spotify Music Profiles</div>
+          <p class="text-gray-700 text-base">
+            Sign In to Spotify to see your top tracks and artist. This is work
+            in progress btw. - Eman
+          </p>
+        </div>
+      </div>
+      <button onClick={() => signIn()} class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Sign In
+      </button>
     </>
   );
 }
