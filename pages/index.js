@@ -1,30 +1,21 @@
 import Head from "next/head";
-import Image from "next/image";
 import Layout, { siteTitle } from "../components/layout";
-import Track from "../components/track";
-import Artist from "../components/artist";
 import User from "../components/user";
 import TopList from "../components/topList";
-import utilStyles from "../styles/utils.module.css";
-import Link from "next/link";
-import { getUsersTop } from "../lib/spotify";
-
 
 import { useEffect, useState } from "react";
-import { getSession, useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home({ context }) {
   const { data: session } = useSession();
   const [trackList, setTrackList] = useState([]);
   const [artistList, setArtistList] = useState([]);
   const [playlistList, setPlaylistList] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const [activeList, setActiveList] = useState("track");
 
   const getMyPlaylists = async () => {
     const res = await fetch("/api/playlist");
     const { items } = await res.json();
-    console.log(items);
     setPlaylistList(items);
   };
 
@@ -40,7 +31,6 @@ export default function Home({ context }) {
     //     return await res.json()
     //   })
     // )
-    console.log(items);
     if (type === "tracks") {
       setTrackList(items);
     } else {
@@ -49,7 +39,6 @@ export default function Home({ context }) {
   };
 
   const switchLists = (list) => {
-    console.log(list);
     if (list !== activeList) {
       setActiveList(list);
     }
@@ -59,8 +48,6 @@ export default function Home({ context }) {
     } else {
       return false;
     }
-
-    
   };
 
   useEffect(() => {
@@ -69,9 +56,6 @@ export default function Home({ context }) {
   }, []);
 
   if (session) {
-    console.log(session);
-    console.log(session.token?.name);
-    console.log(session.token?.picture);
     const name = session.token?.name;
     const profileImage = session.token?.picture;
     const activeButton =
@@ -79,8 +63,6 @@ export default function Home({ context }) {
     const inActiveButton =
       "text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4";
 
-
-    
     return (
       <Layout home>
         <Head>
@@ -89,32 +71,35 @@ export default function Home({ context }) {
         <User name={name} profileImage={profileImage} />
         <ul className="flex">
           <li onClick={() => switchLists("track")} className="flex-1 mr-2">
-            <a className={activeButton} href="#">
+            <a
+              className={activeList === "track" ? activeButton : inActiveButton}
+              href="#"
+            >
               Top Tracks
             </a>
           </li>
           <li onClick={() => switchLists("artist")} className="flex-1 mr-2">
-            <a className={inActiveButton} href="#">
+            <a
+              className={
+                activeList === "artist" ? activeButton : inActiveButton
+              }
+              href="#"
+            >
               Top Artists
             </a>
           </li>
         </ul>
-        <TopList listType={activeList} trackData={trackList} artistData={artistList}/>
-        
+        <TopList
+          listType={activeList}
+          trackData={trackList}
+          artistData={artistList}
+        />
       </Layout>
     );
   }
-
   return (
     <>
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        {/* <Image
-          priority
-          src={ "/images/spotify-banner.png"}
-          className='w-full'
-          height={300}
-          width={300}
-        ></Image> */}
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">Spotify Music Profiles</div>
           <p class="text-gray-700 text-base">

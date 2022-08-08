@@ -8,8 +8,8 @@ export default function Track({ trackName, artist, image }) {
         <Image priority src={image} height={144} width={144} />
       </div>
       <div>
-        <h4 >{trackName}</h4>
-        <h5 className="text-slate-500" >{artist}</h5>
+        <h4>{trackName}</h4>
+        <h5 className="text-slate-500">{artist}</h5>
       </div>
     </div>
   );
