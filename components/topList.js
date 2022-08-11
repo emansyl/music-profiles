@@ -7,6 +7,7 @@ export default function TopList({ listType, trackData, artistData }) {
     return (
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Top Tracks</h2>
+        
         <ol className={utilStyles.list}>
           {trackData.slice(0, 5).map((item) => (
             <li className={utilStyles.listItem} key={item.id}>
