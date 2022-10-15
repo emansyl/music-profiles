@@ -21,7 +21,7 @@ export default function User({ name, profileImage }) {
               <h3 class="text-2xl">{name}</h3>
               <span></span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-gray-200 rounded-lg">
+            {/* <div class="flex justify-between items-center p-3 bg-gray-200 rounded-lg">
               <div class="mr-3">
                 <span class="text-gray-400 block">Following</span>
                 <span class="font-bold text-black text-xl">34</span>
@@ -30,7 +30,7 @@ export default function User({ name, profileImage }) {
                 <span class="text-gray-400 block">Followers</span>
                 <span class="font-bold text-black text-xl">940</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
