@@ -12,6 +12,7 @@ export default function Home({ context }) {
   const [artistList, setArtistList] = useState([]);
   const [playlistList, setPlaylistList] = useState([]);
   const [activeList, setActiveList] = useState("track");
+  const [duration, setDuration] = useState("short_term")
 
   const getMyPlaylists = async () => {
     const res = await fetch("/api/playlist");
@@ -19,8 +20,8 @@ export default function Home({ context }) {
     setPlaylistList(items);
   };
 
-  const getMyTop = async (type) => {
-    const res = await fetch(`api/top/10/0/long_term/${type}`);
+  const getMyTop = async (type, duration = "short_term") => {
+    const res = await fetch(`api/top/10/0/${duration}/${type}`);
     const { items } = await res.json();
     // const responses = await Promise.all(items.map( async (item) =>{
     //   return await fetch(`/api/track/${item.id}`);
@@ -44,16 +45,26 @@ export default function Home({ context }) {
     }
 
     if (list === "track") {
+      getMyTop("tracks");
       return true;
     } else {
+      getMyTop("artists");
       return false;
     }
   };
 
+  const handleSelectDuration = (event) => {
+    
+    console.log(event.target.value);
+    setDuration(event.target.value);
+    console.log(duration);
+
+  }
+
   useEffect(() => {
-    getMyTop("tracks");
-    getMyTop("artists");
-  }, []);
+    getMyTop("tracks",duration);
+    getMyTop("artists",duration);
+  }, [duration]);
 
   if (session) {
     const name = session.token?.name;
@@ -89,6 +100,11 @@ export default function Home({ context }) {
             </a>
           </li>
         </ul>
+        <select value={duration} onChange={handleSelectDuration} className="flex w-full" name="duration" id="duration">
+          <option value="long_term">1 year</option>
+          <option value="medium_term">6 months</option>
+          <option value="short_term">1 month</option>
+        </select>
         <TopList
           listType={activeList}
           trackData={trackList}
